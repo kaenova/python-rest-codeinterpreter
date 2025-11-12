@@ -168,13 +168,24 @@ The following libraries are pre-installed and ready to use:
 
 ## Security Considerations
 
-⚠️ **Warning**: This service executes arbitrary Python code. Deploy with caution:
+⚠️ **Warning**: This service executes arbitrary Python code by design. Deploy with extreme caution:
 
-- Run in isolated environments (containers)
-- Implement authentication/authorization
-- Use network restrictions
-- Monitor resource usage
-- Consider using additional sandboxing (e.g., seccomp, AppArmor)
+### Known Security Implications
+
+- **Code Execution**: The service intentionally uses `exec()` to execute user-provided Python code. This is the core functionality of a code interpreter.
+- **No Sandboxing**: By default, executed code has access to the Python environment and can perform file operations, network requests, etc.
+
+### Recommended Security Measures
+
+- **Isolation**: Always run in isolated containers with minimal permissions
+- **Authentication**: Implement authentication/authorization before the API
+- **Network restrictions**: Use firewall rules to limit network access
+- **Resource limits**: Configure container resource limits (CPU, memory, disk)
+- **Monitoring**: Monitor resource usage and session activity
+- **Additional sandboxing**: Consider using seccomp, AppArmor, or other sandboxing technologies
+- **User/Group**: Run the container as a non-root user
+- **Read-only filesystem**: Mount the filesystem as read-only where possible
+- **No privileged mode**: Never run containers in privileged mode
 
 ## Development
 
