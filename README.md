@@ -15,14 +15,27 @@ A REST API for Python Code Interpreter with session-based execution.
 
 ### Using Docker
 
-Build and run the Docker container:
+#### Option 1: Pull from Docker Hub
+
+Pull and run the pre-built Docker image:
+
+```bash
+docker pull kaenova/python-rest-codeinterpreter
+docker run -p 8000:8000 kaenova/python-rest-codeinterpreter
+```
+
+#### Option 2: Build locally
+
+Build and run the Docker container from source:
 
 ```bash
 docker build -t python-code-interpreter .
 docker run -p 8000:8000 python-code-interpreter
 ```
 
-Or use docker-compose:
+#### Using Docker Compose
+
+Or use docker-compose (builds locally):
 
 ```bash
 docker-compose up --build
